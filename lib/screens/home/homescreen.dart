@@ -2,8 +2,8 @@ import 'package:doctor_application/screens/heart_beat/check_heart_beat.dart';
 import 'package:doctor_application/screens/murmur/check_murmur.dart';
 import 'package:doctor_application/widgets/category_card.dart';
 import 'package:flutter/material.dart';
-import '../patients/search_screen.dart';
-import '/screens/view_patients.dart';
+
+import '../view patient/view_patients.dart';
 import '../lung/lung_check.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -58,7 +58,7 @@ class HomeScreen extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    'MEDI',
+                                    'PULMO',
                                     style: Theme.of(context)
                                         .textTheme
                                         .headlineLarge!
@@ -68,13 +68,13 @@ class HomeScreen extends StatelessWidget {
                                         ),
                                   ),
                                   Text(
-                                    'CO',
+                                    'CARDIA',
                                     style: Theme.of(context)
                                         .textTheme
                                         .headlineLarge!
                                         .copyWith(
                                           color: Colors.teal,
-                                          fontWeight: FontWeight.w700,
+                                          fontWeight: FontWeight.w900,
                                         ),
                                   ),
                                 ],
@@ -104,7 +104,7 @@ class HomeScreen extends StatelessWidget {
                         width: 150,
                         fit: BoxFit.cover,
                         image: AssetImage(
-                          'assets/images/doc.png',
+                          'assets/images/Medical care-pana (2).png',
                         ),
                       ),
                     ),
@@ -167,7 +167,7 @@ class HomeScreen extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) {
-                              return Search();
+                              return ContactsList();
                             }),
                           );
                         },

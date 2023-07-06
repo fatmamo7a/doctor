@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:doctor_application/models/confirmation_model.dart';
 import 'package:doctor_application/models/lung_model.dart';
 import 'package:doctor_application/screens/check/confirmation_popup.dart';

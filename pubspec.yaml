@@ -43,21 +43,41 @@ dependencies:
   flutter_social_button: ^1.1.4
   flutter_svg: ^2.0.5
   # flutter_icons: ^1.1.0
-  fluttertoast: ^8.2.1
   font_awesome_flutter: ^9.1.0
   hexcolor: ^2.0.4
   http: ^0.13.6
   otp_text_field: ^1.1.1
-  provider: ^6.0.5
   screens: ^2.5.0
   settings_ui: ^2.0.2
   stacked_themes: ^0.3.10
   shared_preferences: ^2.1.1
+  flutter_sound: ^8.4.0
+  storage_manager: ^0.2.5
+  toast: ^0.3.0
+  permission_handler: any
+  record: ^3.0.3
+  simple_ripple_animation: ^0.0.3
+  just_audio: ^0.9.29
+  provider: ^6.0.3
+  path_provider: any
+  percent_indicator: ^4.2.2
+  fluttertoast: ^8.0.9
+  mapmyindia_direction_plugin: ^0.2.0
+  assets_audio_player: ^3.0.3+3
+  flutter_secure_storage: ^3.3.3
+  flutter_offline: "^2.1.0"
+
+  get: ^4.6.1
+  logger: ^1.1.0
+  json_annotation: 
+
 
 dev_dependencies:
   flutter_lints: ^2.0.0
+  json_serializable:
   flutter_test:
     sdk: flutter
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

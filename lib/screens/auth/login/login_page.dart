@@ -73,7 +73,7 @@ class _LoginHomePageState extends State<LoginHomePage> {
                         ),
                       ],
                       image: const DecorationImage(
-                        image: AssetImage("assets/images/img_2.png"),
+                        image: AssetImage("assets/images/Login-amico (3).png"),
                       ),
                     ),
                   ),

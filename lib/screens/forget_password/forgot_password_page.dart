@@ -1,5 +1,13 @@
+import 'package:dio/dio.dart';
+import 'package:doctor_application/screens/forget_password/bloc/password_cubit.dart';
+import 'package:doctor_application/screens/forget_password/bloc/password_state.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../widgets/rounded_btn.dart';
+import '../auth/login/login_page.dart';
 import 'forgot_password_verification_page.dart';
+
 
 class ForgotPasswordPage extends StatefulWidget {
   const ForgotPasswordPage({Key? key}) : super(key: key);
@@ -9,15 +17,9 @@ class ForgotPasswordPage extends StatefulWidget {
 }
 
 class ForgotPasswordPageState extends State<ForgotPasswordPage> {
-  final _formKey = GlobalKey<FormState>();
-  final _emailController = TextEditingController();
-  final bool _isLoading = false;
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  @override
-  void dispose() {
-    _emailController.dispose();
-    super.dispose();
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -28,12 +30,16 @@ class ForgotPasswordPageState extends State<ForgotPasswordPage> {
         title: const Text('Forgot Password'),
       ),
       backgroundColor: Colors.grey[300],
-      body: SingleChildScrollView(
+        body: BlocBuilder<passwordCubit, passwordState>(builder: (ctx, state) {
+      return SingleChildScrollView(
         child: Column(
           children: [
             Container(
               margin: const EdgeInsets.all(10.0),
-              width: MediaQuery.of(context).size.width,
+              width: MediaQuery
+                  .of(context)
+                  .size
+                  .width,
               height: 300,
               decoration: BoxDecoration(
                 /* border: Border.all(
@@ -50,7 +56,7 @@ class ForgotPasswordPageState extends State<ForgotPasswordPage> {
                   ),
                 ],
                 image: const DecorationImage(
-                  image: AssetImage("assets/images/download.png"),
+                  image: AssetImage("assets/images/Reset password-pana.png"),
                 ),
               ),
             ),
@@ -59,6 +65,7 @@ class ForgotPasswordPageState extends State<ForgotPasswordPage> {
                 margin: const EdgeInsets.fromLTRB(25, 10, 25, 10),
                 padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                 child: Column(
+
                   children: [
                     Container(
                       alignment: Alignment.topLeft,
@@ -124,107 +131,70 @@ class ForgotPasswordPageState extends State<ForgotPasswordPage> {
                               if (val!.isEmpty) {
                                 return "Email can't be empty";
                               } else if (!RegExp(
-                                      r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$")
+                                  r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$")
                                   .hasMatch(val)) {
                                 return "Enter a valid email address";
                               }
                               return null;
                             },
                           ),
-                          const SizedBox(height: 20.0),
-                          SizedBox(
-                            width: double.infinity,
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                foregroundColor: Colors.black,
-                                backgroundColor: Colors.red[200],
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(50),
-                                ),
+                          const SizedBox(height: 10),
+                              CustomRoundedButton(
+                                text: 'Send',
+                                load: state is PasswordLoading ? true : false,
+                                textColor: Colors.white,
+                                pressed: () {
+                                  if (_formKey.currentState!.validate()) {
+                                    passwordCubit.get(ctx).password(context);
+                                  }
+                                  else {
+                                    return ;
+                                  }
+                                },
                               ),
-                              onPressed: _submit,
-                              child: const Text(
-                                'Send',
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ),
-                          ),
+
+
                         ],
                       ),
                     ),
                     const SizedBox(height: 30.0),
-                    // Text.rich(
-                    //   TextSpan(
-                    //     children: [
-                    //       const TextSpan(text: "Remember your password? "),
-                    //       TextSpan(
-                    //         text: 'Login',
-                    //         recognizer: TapGestureRecognizer()
-                    //           ..onTap = () {
-                    //             Navigator.push(
-                    //               context,
-                    //               MaterialPageRoute(
-                    //                   builder: (context) => const LoginHomePage()),
-                    //             );
-                    //           },
-                    //         style: TextStyle(
-                    //           color: Colors
-                    //               .deepOrange[300], // set the color to blue
-                    //         ),
-                    //       ),
-                    //     ],
-                    //   ),
-                    // ),
+                    Text.rich(
+          TextSpan(
+                children: [
+                  const TextSpan(text: "Remember your password? "),
+                          TextSpan(
+                            text: 'Login',
+                           recognizer: TapGestureRecognizer()
+                               ..onTap = () {
+                                 Navigator.push(
+                                  context,
+                                 MaterialPageRoute(
+                                     builder: (context) => const LoginHomePage()),
+                                 );
+                              },
+                            style: TextStyle(
+                            color: Colors
+                                  .deepOrange[300], // set the color to blue
+                            ),
+                          ),
+                         ],
+                      ),
+                     ),
                   ],
                 ),
               ),
             ),
           ],
+
         ),
-      ),
+
+
+          );
+        }),
     );
   }
-
-  void _submit() async {
-    // if (_formKey.currentState!.validate()) {
-    //   setState(() {
-    //     _isLoading = true;
-    //   });
-    //
-    //   final email = _emailController.text;
-    //
-    //   try {
-    //     final response = await Dio()
-    //         .post('https://bsubackendapi.com/api?action=register', data: {
-    //       'email': email,
-    //     });
-    //
-    //     if (response.statusCode == 200) {
-    //       // Registration successful, do something
-    //         Navigator.of(context).pushAndRemoveUntil(
-    //             MaterialPageRoute(
-    //                 builder: (context) => const ForgotPasswordVerificationPage()),
-    //                 (Route<dynamic> route) => false);
-    //
-    //     } else {
-    //       print('error');
-    //       print('An error occurred .');
-    //       // Registration failed, show error message
-    //     }
-    //   } catch (e) {
-    //     print('error');
-    //
-    //     // Registration failed, show error message
-    //     print('An error occurred .');
-    //   }
-    //
-    //   setState(() {
-    //     _isLoading = true;
-    //   });
-    // }
-    Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(
-            builder: (context) => const ForgotPasswordVerificationPage()),
-        (Route<dynamic> route) => false);
-  }
 }
+
+
+
+

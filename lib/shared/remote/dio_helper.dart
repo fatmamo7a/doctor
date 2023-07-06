@@ -61,6 +61,6 @@ class DioHelper {
       queryParameters: query,
     );
 
-    return json.decode(response.data);
+    return response.data;
   }
 }

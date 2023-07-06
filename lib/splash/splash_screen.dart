@@ -54,7 +54,7 @@ class SplashScreenState extends State<SplashScreen> {
                 CircleAvatar(
                   radius: 150,
                   backgroundImage: AssetImage(
-                    'assets/images/health-min.gif',
+                    'assets/images/health-min',
                   ),
                 ),
                 // SizedBox(width: 20),

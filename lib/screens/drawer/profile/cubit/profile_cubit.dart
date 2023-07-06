@@ -14,7 +14,7 @@ class ProfileCubit extends Cubit<ProfileState> {
 
   File? picturePath;
   static ProfileCubit get(context) => BlocProvider.of(context);
-  onUploadRecord() async {
+  onUpload() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles();
     if (result != null) {
       picturePath = File(result.files.single.path!);

@@ -77,7 +77,7 @@ class MapScreenState extends State<ProfileDrawer>
                                             )
                                           : const DecorationImage(
                                               image: ExactAssetImage(
-                                                  'assets/images/profilimg.jpg'),
+                                                  'assets/images/Profile pic-pana.png.jpg'),
                                               fit: BoxFit.cover,
                                             ),
                                     )),
@@ -91,7 +91,7 @@ class MapScreenState extends State<ProfileDrawer>
                                   children: [
                                     InkWell(
                                       onTap: ProfileCubit.get(context)
-                                          .onUploadRecord,
+                                          .onUpload,
                                       child: const CircleAvatar(
                                         backgroundColor: Colors.red,
                                         radius: 25.0,
